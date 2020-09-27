@@ -1,0 +1,30 @@
+Sub change_text_color()
+    Debug.Print Selection.Text
+    Selection.Font.Bold = wdToggle
+    Debug.Print HEXCOL2RGB(Selection.Text)
+    Selection.Font.Color = HEXCOL2RGB(Selection.Text)
+End Sub
+Public Function HEXCOL2RGB(ByVal HexColor As String) As String
+    'The input at this point could be HexColor = "#00FF1F"
+Dim Red As String
+Dim Green As String
+Dim Blue As String
+     'Replace(HexColor, "#", "")
+    'Here HexColor = "00FF1F"
+Red = Val("&H" & Mid(HexColor, 1, 2))
+    'The red value is now the long version of "00"
+Green = Val("&H" & Mid(HexColor, 3, 2))
+    'The red value is now the long version of "FF"
+Blue = Val("&H" & Mid(HexColor, 5, 2))
+    'The red value is now the long version of "1F"
+HEXCOL2RGB = RGB(Red, Green, Blue)
+    'The output is an RGB value
+End Function
+Sub hexing()
+Dim s As String
+For i = 0 To 2
+Debug.Print Hex(Split(Selection.Text, "/", , vbTextCompare)(i))
+s = s & Hex(Split(Selection.Text, "/", , vbTextCompare)(i))
+Next i
+Selection.Text = "#" & s
+End Sub

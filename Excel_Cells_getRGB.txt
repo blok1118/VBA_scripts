@@ -1,0 +1,24 @@
+VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  'True
+END
+Attribute VB_Name = "Лист1"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = True
+Sub colors()
+Dim cl As Range
+For Each cl In Selection
+    'Debug.Print
+    cl.Value = "#" & getRGB1(cl)
+    
+Next cl
+
+End Sub
+Function getRGB1(rcell) As String
+    Dim sColor As String
+
+    sColor = Right("000000" & Hex(rcell.Interior.Color), 6)
+    getRGB1 = Right(sColor, 2) & Mid(sColor, 3, 2) & Left(sColor, 2)
+End Function

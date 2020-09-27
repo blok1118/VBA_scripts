@@ -1,0 +1,16 @@
+function getRandomInt(min, max) {
+return Math.floor(Math.random() * (max - min)) + min;
+};
+function test(){
+var a = getRandomInt(5,10);
+var b = getRandomInt(5,10);
+alert ('Внимание проверка');
+var c = prompt('Сколько будет ' + a + ' умножить на ' + b + '?', 0);
+alert (a*b == c);
+setTimeout(test, 5*60*1000);
+}
+setTimeout(test, 5*60*1000);
+
+
+
+

@@ -1,0 +1,46 @@
+VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  'True
+END
+Attribute VB_Name = "ThisDocument"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = True
+
+Sub ExportAllText2File()
+
+Dim sh As Shape
+Dim filePath As String
+filePath = "C:\Users\eduard\InduSoft Llc\Уралхим - Проект MES (Уралхим)\03. Этапы проекта\05. Проектирование\02_Схемы матпотоков\КЧХК\ExpFromVisio.csv"
+
+' The advantage of correctly typing fso as FileSystemObject is to make autocompletion
+' (Intellisense) work, which helps you avoid typos and lets you discover other useful
+' methods of the FileSystemObject
+Dim fso As FileSystemObject
+Set fso = New FileSystemObject
+Dim fileStream As TextStream
+
+' Here the actual file is created and opened for write access
+Set fileStream = fso.CreateTextFile(filePath)
+'Debug.Print IsObject(ActiveDocument.Pages("Завод2").Shapes("Установка.713").Text)
+
+Debug.Print ActiveDocument.Pages("Завод2").Shapes.Count
+Dim i As Integer
+i = 1
+Dim txt As String
+For Each sh In ActiveDocument.Pages("Завод2").Shapes
+    If Left(sh.Name, 5) <> "Устан" And Left(sh.Name, 14) <> "Соединительная" And Left(sh.Name, 8) <> "Отгрузка" Then
+        fileStream.Write i & "@"
+        fileStream.Write sh.Name & "@"
+        fileStream.WriteLine sh.Text
+        i = i + 1
+    End If
+Next sh
+    ' Close it, so it is not locked anymore
+fileStream.Close
+
+Set fileStream = Nothing
+Set fso = Nothing
+End Sub
+

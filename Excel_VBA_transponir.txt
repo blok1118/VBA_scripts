@@ -1,0 +1,18 @@
+Sub convers()
+Dim c As Integer
+Dim k As Integer
+k = 2
+Dim sh As Worksheet
+Set sh = ActiveWorkbook.Sheets(2)
+
+For j = 3 To 42
+    c = Sheet2.Cells(114, j)
+    sh.Range(sh.Cells(3, j), sh.Cells(2 + c, j)).Copy Ëèñò1.Cells(k, 2)
+    Ëèñò1.Range(Ëèñò1.Cells(k, 1), Ëèñò1.Cells(k + c - 1, 1)).Merge
+    Ëèñò1.Range(Ëèñò1.Cells(k, 1), Ëèñò1.Cells(k + c - 1, 1)).Value = sh.Cells(2, j).Value
+    'Ëèñò1.Range(Ëèñò1.Cells(k, 1), Ëèñò1.Cells(k + c - 1, 1))
+    k = k + c
+Next j
+
+
+End Sub

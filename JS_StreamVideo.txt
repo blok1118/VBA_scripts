@@ -1,0 +1,27 @@
+<script type="text/javascript" src="http://intek-m.ru/js/swfobject.min.js"></script>
+<script type="text/javascript">
+var flashvars = {src: escape("http://intek-m.ru/hls/letnaya.m3u8"), plugin_m3u8: "http://intek-m.ru/swf/HLSDynamicPlugin.swf"};
+var params = {allowFullScreen: true, allowScriptAccess: "always", bgcolor: "#000000"};
+var attrs = {name: "player"};
+swfobject.embedSWF("http://intek-m.ru/swf/GrindPlayer.swf", "player", "640", "360", "10.2", null, flashvars, params, attrs);
+</script>
+<div id="player"></div>
+
+
+function notify() {
+  alert( "clicked" );
+  if ( $('#player').css('visibility') == 'hidden' )
+    $('#player').css('visibility','visible');
+  else
+    $('#player').css('visibility','hidden');
+});
+}
+$("#shape13-89").on("click", notify );
+
+
+$('#player').click(function(){
+  if ( $('#player').css('visibility') == 'hidden' )
+    $('#player').css('visibility','visible');
+  else
+    $('#player').css('visibility','hidden');
+});
