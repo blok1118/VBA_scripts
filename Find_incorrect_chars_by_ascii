@@ -1,0 +1,16 @@
+Sub Find_incorrect_chars_by_ascii()
+Dim cl As Range
+Dim cd As Integer
+Dim str As String
+For Each cl In Selection
+    str = cl.Address
+    For i = 1 To Len(cl.Value)
+        cd = Asc(Mid(cl.Value, i, 1))
+        '48-122 V 58-64 91-96
+        If Not (((cd > 43) And (cd < 123)) And Not ((cd > 58) And (cd < 65)) And Not ((cd > 90) And (cd < 97))) And cd <> 95 Then
+            str = str & vbTab & i & ":" & Mid(cl.Value, i, 1) & "(" & Asc(Mid(cl.Value, i, 1)) & ")"
+        End If
+    Next i
+    If str <> cl.Address Then Debug.Print str & vbTab & cl.Value
+Next cl
+End Sub
