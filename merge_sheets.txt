@@ -1,0 +1,41 @@
+
+Sub merge_sheets()
+Dim ws As Worksheet
+Dim cv As Range
+Dim i As Integer
+i = 1
+Dim op As Range
+Set op = Ëèñò1.Range("d2")
+oldStatusBar = Application.DisplayStatusBar
+Application.DisplayStatusBar = True
+
+For Each ws In ThisWorkbook.Sheets
+    Application.StatusBar = ws.Name & " èç " & ThisWorkbook.Sheets.Count
+    Set cv = ws.Range("A:AA").Find("Current Value")
+    If Not cv Is Nothing Then
+        Debug.Print cv.Address
+        Set cv = cv.Offset(1, 0)
+        Do While cv.Offset(0, 1 - cv.Column).Value <> ""    'ïîêà íå ïóñòîé ñòîëáåö ñ èìåíåì
+            Debug.Print vbTab & cv.Value
+            op.Offset(0, -3) = ws.Name      ' èìÿ ëèñòà
+            ActiveSheet.Hyperlinks.Add Anchor:=op.Offset(0, -3), Address:="", SubAddress:=ws.Name & "!A1", TextToDisplay:=ws.Name ' ññûëêà íà ëèñò
+            op = cv
+            op.Offset(0, 2).Value = UBound(Split(Trim(cv.Value), " ", , vbTextCompare))
+            If UBound(Split(Trim(cv.Value), " ", , vbTextCompare)) > 0 Then
+                op = Split(Trim(cv.Value), " ", , vbTextCompare)(0)
+            End If
+            op.Offset(0, 1).Value = Trim(cv.Value)
+             
+            op.Offset(0, -2) = Trim(cv.Offset(0, 1 - cv.Column))
+            op.Offset(0, -1) = Trim(cv.Offset(0, 1 - cv.Column))
+            If UBound(Split(Trim(cv.Offset(0, 1 - cv.Column)), " ", , vbTextCompare)) > 0 Then
+                op.Offset(0, -1) = Split(Trim(cv.Offset(0, 1 - cv.Column)), " ", , vbTextCompare)(0)
+            End If
+            Set op = op.Offset(1, 0)
+            Set cv = cv.Offset(1, 0)
+        Loop
+    End If
+Next ws
+Application.StatusBar = False
+Application.DisplayStatusBar = oldStatusBar
+End Sub
