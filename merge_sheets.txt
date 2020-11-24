@@ -5,7 +5,7 @@ Dim cv As Range
 Dim i As Integer
 i = 1
 Dim op As Range
-Set op = Ëèñò1.Range("d2")
+Set op = Лист1.Range("d2")
 oldStatusBar = Application.DisplayStatusBar
 Application.DisplayStatusBar = True
 
