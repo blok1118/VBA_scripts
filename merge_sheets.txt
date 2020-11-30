@@ -10,7 +10,7 @@ oldStatusBar = Application.DisplayStatusBar
 Application.DisplayStatusBar = True
 
 For Each ws In ThisWorkbook.Sheets
-    Application.StatusBar = ws.Name & " èç " & ThisWorkbook.Sheets.Count
+    Application.StatusBar = ws.Name & " из " & ThisWorkbook.Sheets.Count
     Set cv = ws.Range("A:AA").Find("Current Value")
     If Not cv Is Nothing Then
         Debug.Print cv.Address
