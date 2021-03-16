@@ -1,0 +1,33 @@
+Sub merge_a_lot()
+Dim cl As Range
+Set cl = Selection
+Set cl = cl.Offset(0, 1)
+Selection.Merge
+cl.Select
+Set cl = cl.Offset(0, 1)
+Selection.Merge
+cl.Select
+Set cl = cl.Offset(0, 1)
+Selection.Merge
+cl.Select
+Set cl = cl.Offset(0, 2)
+Selection.Merge
+cl.Select
+Set cl = cl.Offset(0, 1)
+Selection.Merge
+cl.Select
+Set cl = cl.Offset(0, 1)
+Selection.Merge
+cl.Select
+Set cl = cl.Offset(0, 1)
+Selection.Merge
+cl.Select
+Set cl = cl.Offset(0, 1)
+Selection.Merge
+cl.Select
+Set cl = cl.Offset(0, 1)
+Selection.Merge
+cl.Select
+Set cl = cl.Offset(0, 1)
+Selection.Merge
+End Sub
