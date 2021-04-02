@@ -1,0 +1,43 @@
+Public Sub AllAddins()
+'UpdatebyKutools20191031
+Dim xWSh As Worksheet
+Dim xWB As Workbook
+Dim xAddin As AddIn
+Dim xCOMAddin As COMAddIn
+Dim xFA, xFCA As Integer
+Dim xI As Integer
+Dim xStr As String
+  
+On Error Resume Next
+Application.DisplayAlerts = False
+xStr = "Addins List"
+Set xWB = Application.ActiveWorkbook
+Set xWSh = xWB.Worksheets.Item(xStr)
+If Not xWSh Is Nothing Then
+    xWSh.Delete
+End If
+Set xWSh = xWB.Worksheets.Add
+xWSh.Name = xStr
+xWSh.Range("A1").Value = "Name"
+xWSh.Range("B1").Value = "FullName"
+xWSh.Range("C1").Value = "Installed"
+For xFA = 1 To Application.AddIns.Count
+    Set xAddin = Application.AddIns(xFA)
+    xI = xFA + 1
+    Range("A" & xI).Value = xAddin.Name
+    Range("B" & xI).Value = xAddin.FullName
+    Range("C" & xI).Value = xAddin.Installed
+Next xFA
+xFA = (xFA + 2)
+xWSh.Range("A" & xFA).Value = "Description"
+xWSh.Range("B" & xFA).Value = "progID"
+xWSh.Range("C" & xFA).Value = "Connect"
+For xFCA = 1 To Application.COMAddIns.Count
+    xI = xFCA + xFA
+    Set xCOMAddin = Application.COMAddIns(xFCA)
+    Range("A" & xI).Value = xCOMAddin.Description
+    Range("B" & xI).Value = xCOMAddin.progID
+    Range("C" & xI).Value = xCOMAddin.Connect
+Next xFCA
+Application.DisplayAlerts = True
+End Sub
